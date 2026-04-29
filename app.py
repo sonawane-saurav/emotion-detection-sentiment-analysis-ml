@@ -22,7 +22,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("🧠 Emotion Detection AI System")
+st.title("Emotion Detection AI System")
 st.markdown("Hybrid Model: TF-IDF + Transformer (DistilRoBERTa)")
 
 model = pickle.load(open("model.pkl", "rb"))
@@ -83,7 +83,7 @@ if st.button("Predict Emotion"):
 
 
     with col1:
-        st.markdown("### 📊 Classical ML (TF-IDF)")
+        st.markdown("###Classical ML (TF-IDF)")
 
         st.markdown(f"""
         <div style='padding:10px;background:#262730;border-radius:10px'>
