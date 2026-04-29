@@ -3,18 +3,13 @@ import pickle
 import numpy as np
 from transformers import pipeline
 
-# =========================
-# PAGE CONFIG
-# =========================
+
 st.set_page_config(
     page_title="Emotion AI Dashboard",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# =========================
-# DARK UI STYLE
-# =========================
 st.markdown("""
     <style>
     .main {
@@ -30,9 +25,6 @@ st.markdown("""
 st.title("🧠 Emotion Detection AI System")
 st.markdown("Hybrid Model: TF-IDF + Transformer (DistilRoBERTa)")
 
-# =========================
-# LOAD MODELS
-# =========================
 model = pickle.load(open("model.pkl", "rb"))
 vectorizer = pickle.load(open("vectorizer.pkl", "rb"))
 
@@ -41,9 +33,6 @@ bert_model = pipeline(
     model="j-hartmann/emotion-english-distilroberta-base"
 )
 
-# =========================
-# EMOJI MAP
-# =========================
 emoji_map = {
     "joy": "😊 Joy",
     "anger": "😡 Anger",
@@ -53,9 +42,6 @@ emoji_map = {
     "neutral": "😐 Neutral"
 }
 
-# =========================
-# SIDEBAR EXAMPLES
-# =========================
 st.sidebar.header("💡 Try Examples")
 
 examples = [
@@ -70,23 +56,15 @@ for e in examples:
     if st.sidebar.button(e):
         st.session_state["input_text"] = e
 
-# =========================
-# INPUT
-# =========================
 text = st.text_area(
     "Enter your text:",
     value=st.session_state.get("input_text", ""),
     height=150
 )
 
-# =========================
-# PREDICTION
-# =========================
-if st.button("🚀 Predict Emotion"):
 
-    # ---------------------
-    # TF-IDF MODEL
-    # ---------------------
+if st.button("Predict Emotion"):
+
     vec = vectorizer.transform([text])
     pred_ml = model.predict(vec)[0]
 
@@ -95,21 +73,15 @@ if st.button("🚀 Predict Emotion"):
     except:
         conf_ml = 0.6
 
-    # ---------------------
-    # TRANSFORMER MODEL
-    # ---------------------
+
     bert_result = bert_model(text)[0]
     label = bert_result["label"].lower()
     score = bert_result["score"]
 
-    # =========================
-    # OUTPUT LAYOUT
-    # =========================
+
     col1, col2 = st.columns(2)
 
-    # ---------------------
-    # ML MODEL OUTPUT
-    # ---------------------
+
     with col1:
         st.markdown("### 📊 Classical ML (TF-IDF)")
 
@@ -123,9 +95,6 @@ if st.button("🚀 Predict Emotion"):
         st.progress(float(conf_ml))
         st.info(f"{round(conf_ml*100,2)}%")
 
-    # ---------------------
-    # TRANSFORMER OUTPUT
-    # ---------------------
     with col2:
         st.markdown("### 🤖 Transformer Model")
 
@@ -141,9 +110,7 @@ if st.button("🚀 Predict Emotion"):
         st.progress(float(score))
         st.info(f"{round(score*100,2)}%")
 
-# =========================
-# COMPARISON SECTION
-# =========================
+
 st.markdown("---")
 st.subheader("📊 Model Comparison")
 
@@ -155,9 +122,7 @@ with col1:
 with col2:
     st.metric("Transformer Model", "85%+ (typical)", "Deep Learning")
 
-# =========================
-# EXPLANATION SECTION
-# =========================
+
 st.markdown("---")
 st.subheader("🧠 How It Works")
 
@@ -167,8 +132,6 @@ st.info("""
 - This allows comparison of classical ML vs modern AI approaches.
 """)
 
-# =========================
-# FOOTER
-# =========================
+
 st.markdown("---")
 st.markdown("🚀 Built with Streamlit | TF-IDF + Transformers | Emotion AI System")
