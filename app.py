@@ -42,6 +42,15 @@ emoji_map = {
     "neutral": "😐 Neutral"
 }
 
+label_map = {
+    0: "😢 Sadness",
+    1: "😊 Joy",
+    2: "😡 Anger",
+    3: "😨 Fear",
+    4: "❤️ Love",
+    5: "😐 Neutral"
+}
+
 st.sidebar.header("💡 Try Examples")
 
 examples = [
@@ -85,9 +94,11 @@ if st.button("Predict Emotion"):
     with col1:
         st.markdown("###Classical ML (TF-IDF)")
 
+        emotion = label_map.get(int(pred_ml), "Unknown")
+
         st.markdown(f"""
         <div style='padding:10px;background:#262730;border-radius:10px'>
-        🎯 Predicted Class: <b>{pred_ml}</b>
+        🎯 Predicted Emotion: <b>{emotion}</b>
         </div>
         """, unsafe_allow_html=True)
 
