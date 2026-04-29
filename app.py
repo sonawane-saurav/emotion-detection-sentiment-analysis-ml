@@ -43,12 +43,12 @@ emoji_map = {
 }
 
 label_map = {
-    0: "😢 Sadness",
-    1: "😊 Joy",
-    2: "😡 Anger",
-    3: "😨 Fear",
-    4: "❤️ Love",
-    5: "😐 Neutral"
+    0: "😢 Sadness / Abuse",
+    1: "😂 Humor / Sarcasm",
+    2: "😐 Neutral",
+    3: "⚡ Emotional / Intense",
+    4: "😊 Positive Emotion (Joy/Love)",
+    5: "🧾 Support / Advice"
 }
 
 st.sidebar.header("💡 Try Examples")
