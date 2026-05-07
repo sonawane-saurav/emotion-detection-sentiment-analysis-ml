@@ -31,7 +31,7 @@ st.markdown("""
 # =========================
 # TITLE
 # =========================
-st.title("🧠 Emotion Detection AI System")
+st.title("🧠 Hybrid NLP-Based Emotion Intelligence System")
 st.markdown("Hybrid Model: TF-IDF + Transformer (DistilRoBERTa)")
 
 # =========================
